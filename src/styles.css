@@ -1,0 +1,104 @@
+/* Reset & Base Styles */
+:root {
+  --primary: #3b82f6;
+  --background: #f9fafb;
+  --text: #111827;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--background);
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Card Styles */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.card-header {
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  font-size: 1.2em;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+/* Button Styles */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+/* Link Styles */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+
+/* Form Styles */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  color: #6b7280;
+  font-size: 0.9em;
+}
+
+/* Dark Mode Toggle */
+.dark-mode {
+  --primary: #8b5cf6;
+  --background: #1e1e2f;
+  --text: #f1f5f9;
+}
