@@ -1,28 +1,105 @@
-# Personal Finance Manager
+# Finance Web
 
-A web application to manage personal finances with features for tracking statements, bills, recurrencies, credit cards, and graphical reports.
+Aplicação web de gestão financeira pessoal. Frontend em React que consome uma API Java/Spring Boot planejada em repositório separado.
 
-## Features
-- Manage financial statements
-- Track bills and recurrencies
-- Monitor credit cards
-- Generate graphical reports
-- Organize financial groups
+## Status
 
-## Technology
-- React
+Fase 0 concluída: base do projeto, design system, testes e CI.
 
-## Installation
-1. Clone the repository
-2. Install dependencies with `npm install`
-3. Configure environment variables
+Fases seguintes:
 
-## Running the Application
-```npm start```
-This launches the development server and opens http://localhost:3000 in your default browser.
+| Fase | Escopo                                                       |
+| ---- | ------------------------------------------------------------ |
+| F1   | Cliente OpenAPI, autenticação, guarda de rotas e layout base |
+| F2   | Design system e navegação                                    |
+| F3   | Grupos de categorias e categorias                            |
+| F4   | Contas e cartões                                             |
+| F5   | Transações e transferências                                  |
+| F6   | Despesas recorrentes e contas a pagar                        |
+| F7   | Faturas de cartão                                            |
+| F8   | Dashboard e relatórios                                       |
+| F9   | Hardening, E2E e build de produção                           |
 
-## Contributing
-[Instructions for contributions]
+## Stack
 
-## License
-[Your license information]
+- React 19 + TypeScript
+- Vite
+- React Router 7
+- TanStack Query 5
+- React Hook Form + Zod
+- Tailwind CSS 4 + shadcn/ui
+- Recharts
+- Vitest + React Testing Library + MSW
+- ESLint + Prettier
+
+## Requisitos
+
+- Node.js 24 ou superior
+- npm 11 ou superior
+
+## Instalação
+
+```bash
+npm install
+cp .env.example .env
+```
+
+No Windows:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+## Execução
+
+```bash
+npm run dev
+```
+
+Aplicação em `http://localhost:5173`.
+
+Em desenvolvimento, requisições para `/api` são encaminhadas para `http://localhost:8080` pelo proxy do Vite.
+
+## Scripts
+
+| Comando                | Descrição                         |
+| ---------------------- | --------------------------------- |
+| `npm run dev`          | Servidor de desenvolvimento       |
+| `npm run build`        | Typecheck e build de produção     |
+| `npm run preview`      | Pré-visualização do build         |
+| `npm run lint`         | ESLint                            |
+| `npm run lint:fix`     | ESLint com correções              |
+| `npm run typecheck`    | Verificação de tipos              |
+| `npm test`             | Testes unitários e de componentes |
+| `npm run test:watch`   | Testes em modo watch              |
+| `npm run format`       | Prettier                          |
+| `npm run format:check` | Verificação de formatação         |
+
+## Estrutura
+
+```text
+src/
+  app/            router, providers e layout
+  components/     UI, layout, tabelas, formulários e gráficos
+  features/       funcionalidades por domínio
+  lib/            API, dinheiro, datas, queries e validação
+  test/           configuração de testes
+```
+
+## Contrato da API
+
+O frontend consome a API REST em `/api/v1`.
+
+Premissas:
+
+- Autenticação por sessão em cookie `HttpOnly` com CSRF.
+- Valores monetários em centavos.
+- Datas em ISO 8601.
+- Erros no formato RFC 9457 Problem Details.
+- Tipos TypeScript gerados a partir do OpenAPI.
+
+O contrato definitivo será publicado pelo plano do backend.
+
+## Legado
+
+O código anterior está preservado no commit inicial e na tag `legacy` do Git.
