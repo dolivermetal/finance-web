@@ -10,7 +10,9 @@ import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ApiError } from '@/lib/api/problem'
+import { APP_NAME } from '@/lib/app-config'
 import { LoadingScreen } from '@/components/layout/loading-screen'
+import { usePageTitle } from '@/lib/use-page-title'
 import { useAuth } from './auth-context'
 
 const loginSchema = z.object({
@@ -46,6 +48,7 @@ function getLoginErrorMessage(error: unknown): string {
 
 export function LoginPage() {
   const { login, status } = useAuth()
+  usePageTitle('Entrar')
   const navigate = useNavigate()
   const location = useLocation()
   const [showPassword, setShowPassword] = useState(false)
@@ -90,7 +93,7 @@ export function LoginPage() {
           <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Wallet className="size-5" aria-hidden="true" />
           </span>
-          <span className="text-lg font-semibold tracking-tight">Finance Web</span>
+          <span className="text-lg font-semibold tracking-tight">{APP_NAME}</span>
         </div>
 
         <Card>

@@ -8,11 +8,12 @@ Fase 0 concluída: base do projeto, design system, testes e CI.
 
 Fase 1 concluída: cliente HTTP, autenticação por sessão, login, guarda de rotas e layout base.
 
+Fase 2 concluída: navegação lateral, menu mobile, tema claro/escuro, marca e páginas "Em breve".
+
 Próxima fase:
 
 | Fase | Escopo                                |
 | ---- | ------------------------------------- |
-| F2   | Design system e navegação             |
 | F3   | Grupos de categorias e categorias     |
 | F4   | Contas e cartões                      |
 | F5   | Transações e transferências           |
@@ -80,12 +81,22 @@ Em desenvolvimento, requisições para `/api` são encaminhadas para `http://loc
 
 ```text
 src/
-  app/            router, providers e layout
+  app/            router, providers, navegação e layout
   components/     UI, layout, tabelas, formulários e gráficos
   features/       funcionalidades por domínio
   lib/            API, dinheiro, datas, queries e validação
   test/           configuração de testes
 ```
+
+## Interface
+
+- Marca: **Minhas Finanças**.
+- Tema neutro minimalista, com verde para receitas e vermelho para despesas.
+- Sidebar colapsável no desktop; a preferência fica em `localStorage`.
+- Navegação inferior no mobile, com a opção "Mais" abrindo um menu completo.
+- Tema segue o sistema na primeira visita e pode ser alternado manualmente.
+- Áreas ainda não implementadas mostram uma página "Em breve".
+- Textos em português pt-BR, sem camada de i18n.
 
 ## Contrato da API
 

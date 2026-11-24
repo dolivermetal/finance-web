@@ -61,7 +61,7 @@ describe('Auth flow', () => {
     await user.type(screen.getByLabelText('Senha'), 'secret')
     await user.click(screen.getByRole('button', { name: 'Entrar' }))
 
-    expect(await screen.findByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Visão geral' })).toBeInTheDocument()
     expect(capturedRequest?.body).toEqual({
       email: demoUser.email,
       password: 'secret',
@@ -74,7 +74,7 @@ describe('Auth flow', () => {
 
     renderApp('/')
 
-    expect(await screen.findByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Visão geral' })).toBeInTheDocument()
     expect(screen.getByText(`Bem-vindo, ${demoUser.name}.`)).toBeInTheDocument()
   })
 
@@ -84,7 +84,8 @@ describe('Auth flow', () => {
 
     renderApp('/')
 
-    await user.click(await screen.findByRole('button', { name: 'Sair' }))
+    await user.click(await screen.findByRole('button', { name: 'Abrir menu do usuário' }))
+    await user.click(await screen.findByRole('menuitem', { name: 'Sair' }))
 
     expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeInTheDocument()
   })
