@@ -62,11 +62,29 @@ Aplicação em `http://localhost:5173`.
 
 Em desenvolvimento, requisições para `/api` são encaminhadas para `http://localhost:8080` pelo proxy do Vite.
 
+## Desenvolvimento sem backend
+
+Para navegar pelas telas sem a API Java:
+
+```bash
+npm run dev:mock
+```
+
+Esse modo carrega `.env.mock` e ativa MSW no navegador. A sessão inicia autenticada com o usuário demo:
+
+- E-mail: `ana@example.com`
+- Senha: `secret`
+
+O botão "Sair" encerra a sessão simulada. O login com as credenciais acima entra novamente. Recarregar a página restaura a sessão demo.
+
+Os mocks ficam em `src/mocks/handlers.ts`. O service worker fica em `public/mockServiceWorker.js`. O modo só é ativado quando `import.meta.env.DEV` é verdadeiro e `VITE_ENABLE_MSW=true`. O build de produção não ativa mocks.
+
 ## Scripts
 
 | Comando                | Descrição                         |
 | ---------------------- | --------------------------------- |
 | `npm run dev`          | Servidor de desenvolvimento       |
+| `npm run dev:mock`     | Servidor dev com API simulada     |
 | `npm run build`        | Typecheck e build de produção     |
 | `npm run preview`      | Pré-visualização do build         |
 | `npm run lint`         | ESLint                            |

@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router'
 import { describe, expect, it } from 'vitest'
 import { AppRoutes } from '@/app/app-routes'
 import { AppProviders } from '@/app/providers'
-import { demoUser } from '@/test/msw/handlers'
+import { demoUser } from '@/mocks/handlers'
 import { server } from '@/test/msw/server'
 
 function renderApp(initialPath = '/login') {
