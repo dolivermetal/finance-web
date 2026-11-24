@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest'
 import App from './App'
 
 describe('App', () => {
-  it('renders the application title', () => {
+  it('redirects anonymous users to the login page', async () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: 'Finance Web' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeInTheDocument()
   })
 })

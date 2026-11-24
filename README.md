@@ -6,19 +6,20 @@ Aplicação web de gestão financeira pessoal. Frontend em React que consome uma
 
 Fase 0 concluída: base do projeto, design system, testes e CI.
 
-Fases seguintes:
+Fase 1 concluída: cliente HTTP, autenticação por sessão, login, guarda de rotas e layout base.
 
-| Fase | Escopo                                                       |
-| ---- | ------------------------------------------------------------ |
-| F1   | Cliente OpenAPI, autenticação, guarda de rotas e layout base |
-| F2   | Design system e navegação                                    |
-| F3   | Grupos de categorias e categorias                            |
-| F4   | Contas e cartões                                             |
-| F5   | Transações e transferências                                  |
-| F6   | Despesas recorrentes e contas a pagar                        |
-| F7   | Faturas de cartão                                            |
-| F8   | Dashboard e relatórios                                       |
-| F9   | Hardening, E2E e build de produção                           |
+Próxima fase:
+
+| Fase | Escopo                                |
+| ---- | ------------------------------------- |
+| F2   | Design system e navegação             |
+| F3   | Grupos de categorias e categorias     |
+| F4   | Contas e cartões                      |
+| F5   | Transações e transferências           |
+| F6   | Despesas recorrentes e contas a pagar |
+| F7   | Faturas de cartão                     |
+| F8   | Dashboard e relatórios                |
+| F9   | Hardening, E2E e build de produção    |
 
 ## Stack
 
@@ -96,9 +97,42 @@ Premissas:
 - Valores monetários em centavos.
 - Datas em ISO 8601.
 - Erros no formato RFC 9457 Problem Details.
-- Tipos TypeScript gerados a partir do OpenAPI.
+- Tipos TypeScript serão gerados a partir do OpenAPI quando o contrato existir.
 
-O contrato definitivo será publicado pelo plano do backend.
+### Autenticação assumida
+
+| Método | Caminho        | Corpo                 | Resposta                               |
+| ------ | -------------- | --------------------- | -------------------------------------- |
+| POST   | `/auth/login`  | `{ email, password }` | `200` + usuário; cria cookie de sessão |
+| GET    | `/auth/me`     | —                     | `200` + usuário ou `401`               |
+| POST   | `/auth/logout` | —                     | `204`                                  |
+
+Formato do usuário:
+
+```json
+{
+  "id": "uuid",
+  "name": "Ana Silva",
+  "email": "ana@example.com"
+}
+```
+
+CSRF:
+
+- Backend define cookie `XSRF-TOKEN`.
+- Frontend envia header `X-XSRF-TOKEN` em métodos mutáveis.
+- Cookie de sessão nunca é acessado pelo JavaScript.
+- Backend deve definir `XSRF-TOKEN` antes do primeiro `POST`. O `GET /auth/me` do carregamento inicial deve definir o cookie; alternativa é um endpoint `GET /auth/csrf`.
+- Cookie de sessão: `HttpOnly; Secure; SameSite=Lax; Path=/`.
+
+### Segurança de credenciais
+
+- Login sempre por HTTPS em produção.
+- Credenciais apenas no corpo JSON de `POST /auth/login`.
+- Nunca enviar senha na URL, em logs ou em armazenamento local.
+- Backend valida usuário e senha e cria a sessão.
+- Frontend não guarda senha, token de acesso ou refresh token.
+- Em desenvolvimento, HTTP é aceitável apenas em `localhost`.
 
 ## Legado
 
